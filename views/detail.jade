@@ -1,0 +1,25 @@
+extends layout
+
+block content
+    h1= title
+    .container
+        .row
+                .col-md-7
+                    embed(src=movie.flash,allowFullScreen='true',quaity='height',width='720',height='600',type='application/x-shockwave-flash',align='middle')
+                .col-md-5
+                    dl.dl-horizontal
+                        dt 电影名字
+                        dd=movie.title
+                        dt 导演
+                        dd=movie.doctor
+                        dt 国家
+                        dd=movie.country
+                        dt 语言
+                        dd=movie.language
+                        dt 上映年份
+                        dd=movie.year
+                        dt 简介
+                        dd=movie.summary
+                        dt 海报
+                        dd
+                            img(src=movie.poster)

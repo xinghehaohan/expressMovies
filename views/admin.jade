@@ -1,0 +1,44 @@
+extends layout
+
+block content
+    h1= title
+    .container
+        .row
+            .col-md-12.column
+                form.form-horizontal(method='post',role='form',action='/admin/movie/new')
+                    input(type='hidden',name='_id',value='#{movie._id}')
+                    .form-group
+                        label.col-md-2.control-label(for='inputTitle') 电影名字
+                        .col-md-10
+                            input#inputTitle.form-control(type='text',name='title',value='#{movie.title}')
+                    .form-group
+                        label.col-sm-2.control-label(for='doctor') 导演
+                        .col-sm-10
+                            input#doctor.form-control(type='text',name='doctor',value='#{movie.doctor}')
+                    .form-group
+                        label.col-sm-2.control-label(for='country') 国家
+                        .col-sm-10
+                            input#country.form-control(type='text',name='country',value='#{movie.country}')
+                    .form-group
+                        label.col-sm-2.control-label(for='language') 语言
+                        .col-sm-10
+                            input#language.form-control(type='text',name='language',value='#{movie.language}')
+                    .form-group
+                        label.col-sm-2.control-label(for='poster') 海报地址
+                        .col-sm-10
+                            input#poster.form-control(type='text',name='poster',value='#{movie.poster}')
+                    .form-group
+                        label.col-sm-2.control-label(for='flash') 片源地址
+                        .col-sm-10
+                            input#flash.form-control(type='text',name='flash',value='#{movie.flash}')
+                    .form-group
+                        label.col-sm-2.control-label(for='year') 上映年份
+                        .col-sm-10
+                            input#year.form-control(type='text',name='year',value='#{movie.year}')
+                    .form-group
+                        label.col-sm-2.control-label(for='summary') 简介
+                        .col-sm-10
+                            input#summary.form-control(type='text',name='summary',value='#{movie.summary}')
+                    .form-group
+                            button.btn.btn.btn-success.btn-lg.col-xs-6(type='submit') 录入
+                            button.btn.btn.btn-info.btn-lg.col-xs-6(type='reset') 清除数据
