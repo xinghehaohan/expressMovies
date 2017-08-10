@@ -1,15 +1,124 @@
 var express = require('express');
-var router = express.Router();
 var mongoose = require('mongoose');
 var Movie = require('../models/movie');
+var User = require('../models/user');
 var underscore = require('underscore');
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
+// var mongoStore = require('connect-mongo')(express);
 var db = mongoose.connect('mongodb://localhost:27017/');
 db.connection.on('open', function () {
     console.log('——数据库连接成功！——');
 });
-/* GET home page. */
-router.get('/', function(req, res, next) {
+mongoose.set('debug',true)
 
+var app = express();
+app.use(session({
+    secret: 'su',
+    name: 'cookie_name',
+    proxy: true,
+    resave: true,
+    saveUninitialized: true,
+    store: new MongoStore({
+            url: 'mongodb://localhost:27017/',
+            collection: 'sessions'
+    })
+}));
+
+app.use(function (req,res,next) {
+    var user = req.cookies.userName;
+    console.log('用户信息'+user)
+    if(user){
+        res.locals.user = user
+    };
+    next();
+});
+var router = express.Router();
+
+/* GET home page. */
+router.post('/user/signup',function (req,res,next) {
+    console.log("********注册账户 post 请求********");
+    var query = req.body;
+    User.findOne({name:query.name},function (err,user) {
+        if(err){
+            console.log(err)
+        }
+       if(user){
+           res.redirect('/user/list')
+       } else {
+           user = new User(query);
+           user.save(function(err, user) {
+               if (err) {
+                   console.log(err)
+               }
+               res.redirect('/')
+           });
+       }
+    });
+});
+
+router.post('/user/signin',function (req,res,next) {
+    console.log('用户登陆')
+    var user =  req.body;
+    var name = user.name;
+    var password = user.password;
+    User.findOne({name:name},function (err,user) {
+        if(err){
+            console.log(err)
+        }
+        if(!user){
+            res.redirect('/')
+        }else {
+            user.comparePassword(password,function (err,isMatch) {
+                if(err){
+                    console.log(err)
+                }
+                if(isMatch){
+                    console.log('账户密码正确')
+                    res.cookie("userName",user.name,{maxAge:60000000,httpOnly:false});
+                    res.redirect('/')
+                }else {
+                    res.send('密码错误，请重新输入或注册账号！');
+                }
+            })
+        }
+    })
+});
+
+///logout 用户登出
+router.get('/logout',function (req,res,next) {
+    res.clearCookie('userName');
+    res.redirect('/')
+});
+//删除用户
+router.post('/admin/deleteUser',function (req,res,next) {
+    var id = req.body.id;
+    if(id){
+        User.remove({_id:id},function (err,users) {
+            if(err){
+                console.log(err)
+            }
+            res.json({
+                success:1,
+                users:users
+            })
+        })
+    }
+
+});
+router.get('/user/list',function (req,res,next) {
+    console.log("********用户列表页 get 请求********");
+    User.fetch(function (err,users) {
+        if (err){
+            console.log(err)
+        }
+        res.render('userList',{
+            title:'用户列表页',
+            users:users
+        })
+    });
+});
+router.get('/', function(req, res, next) {
     console.log("********后台 电影主页和列表页  数据处理路由页********");
 
     Movie.fetch(function (err, movies) {
@@ -19,7 +128,7 @@ router.get('/', function(req, res, next) {
         }
         res.render('index', {
             title:'详情页',
-            movies:movies
+            movies:movies,
         });
     });
     // 静态文件数据
@@ -48,7 +157,7 @@ router.get('/movie/:id',function (req,res,next) {
     console.log(movie)
     res.render('detail',{
       title:movie.title,
-      movie:movie
+      movie:movie,
     })
   });
     // 静态文件数据
@@ -142,7 +251,6 @@ router.post('/admin/movie/new',function (req,res,next) {
 router.get('/admin/list',function (req,res,next) {
     console.log("********列表页 get 请求********");
     Movie.fetch(function (err,movies) {
-        console.log(movies)
     if (err){
       console.log(err)
     }

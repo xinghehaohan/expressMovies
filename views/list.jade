@@ -1,28 +1,30 @@
 extends layout
 
 block content
-    h1= title
-    .container
+    .list
+        h2= title
         .row
-        table.table.table-hover.table-bordered
+        table.table.table-bordered
             thead
                 tr
+                    th 排名
                     th 电影名字
                     th 导演
                     th 国家
-                    th 上映年份
-                    th 录入时间
+                    //th 上映年份
+                    //th 录入时间
                     th 查看
                     th 更新
                     th 删除
-            tbody
-                each item in movies
+            tbody#moviesList
+                each item ,index in movies
                     tr(class='item-id-#{item._id}')
+                        td #{index+1}
                         td #{item.title}
                         td #{item.doctor}
                         td #{item.country}
-                        td #{item.year}
-                        td #{item.mate.createAt}
+                        //td #{item.year}
+                        //td #{item.mate.createAt}
                         //td #{moment(item.mate.createdAt).format('MM/DD/YYY')}
                         td: a.btn.btn-info(href='../movie/#{item._id}') 查看
                         td: a.btn.btn-success(href='../admin/update/#{item._id}') 修改

@@ -9,12 +9,75 @@ html
     script(src='/javascripts/adminDelete.js')
 
   body
-
-      div.col-sm-2
-        div.list-group
-          a.list-group-item.active MoviesWeb
-          a.list-group-item(href='../') 电影展示页
-          a.list-group-item(href='../admin/list') 电影列表页
-          a.list-group-item(href='../admin/movie') 后台录入页
-      div.col-sm-10
+    #aniwrap
+    .imgbox
+      .navbar.navbar-default.navbar-fixed-top
+        .container
+          .navbar-header
+            a.logo(href="../") 绵山
+          if user
+            .navbar-text.navbar-right
+              span 欢迎您，#{user}
+              span &nbsp;|&nbsp;
+              a.navbar-link(href="/logout") 登出
+          else
+            .navbar-text.navbar-right
+              a.signup(href="#",data-toggle="modal" data-target="#signupModal") 注册
+                //span &nbsp; | &nbsp;
+              a.login(href="#",data-toggle="modal" data-target="#signinModal") 登陆
+      .serchTitle  离恨恰如春草，更行更远还生
+      form.serchInput
+        input#query
+        a#go
+      .serchWord
+        .hotword
+          span.hottitle 热门搜索:
+          span 这个杀手不太冷
+          span 千与千寻
+          span 少年派的奇幻漂流
+          span 冰与火之歌
+    div.col-sm-3
+        ul.leftUl
+          li
+           a 导航栏
+          li
+            a(href='../') 电影展示页
+          li
+           a(href='../admin/list') 电影列表页
+          li
+           a(href='../admin/movie') 后台录入页
+          li
+           a(href='../user/list') 用户列表页
+      div.col-sm-9
         block content
+  #signupModal.modal.fade
+    .modal-dialog
+      .modal-content
+        form(method="post",action="/user/signup")
+          .modal-header 注册
+          .modal-body
+            .form-group
+              label(for="signupName") 用户名
+              input#signupName.form-control(name="name" type="text")
+            .form-group
+              label(for="signupPassord") 用户名
+              input#signupPassord.form-control(name="password" type="text")
+          .modal-footer
+            button.btn.btn-default(type="button",data-dismiss="modal") 关闭
+            button.btn.btn-success(type="submit") 提交
+
+  #signinModal.modal.fade
+    .modal-dialog
+      .modal-content
+        form(method="post",action="/user/signin")
+          .modal-header 登陆
+          .modal-body
+            .form-group
+              label(for="signinName") 用户名
+              input#signinName.form-control(name="name" type="text")
+            .form-group
+              label(for="signinPassord") 用户名
+              input#signinPassord.form-control(name="password" type="text")
+          .modal-footer
+            button.btn.btn-default(type="button",data-dismiss="modal") 关闭
+            button.btn.btn-success(type="submit") 提交

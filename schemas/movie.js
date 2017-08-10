@@ -12,7 +12,7 @@ var MovieSchema = new mongoose.Schema({
     summary: String,//简介
     flash: String,//片源的地址
     poster: String,//海报的地址
-    year: Number,
+    year: String,
     mate: {
         createAt: {
             type: Date,

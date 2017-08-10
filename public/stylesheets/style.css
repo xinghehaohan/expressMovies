@@ -1,11 +1,205 @@
 body {
+  background: #2d2f2f !important;
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  padding: 0px !important;
 }
 
 a {
   color: #00B7FF;
+  text-decoration: none;
 }
 .form-group{
   margin-bottom: 15px;
+}
+.detail{
+  color: #fff;
+}
+.list{
+  /*background: #fff;*/
+}
+.admin{
+  color: #fff;
+}
+.wrap{
+  width: 800px;
+  margin: 10px 20px;
+}
+.item {
+  height: 320px;
+  margin-bottom: 10px;
+}
+.table{
+  color: #fff;
+  width: 1000px!important;
+}
+.thumbnail{
+  box-shadow: 0 0 5px rgb(169, 148, 148);
+  position: relative;
+}
+.item img{
+  border: 1px solid rgba(204, 204, 204, 0.38)
+
+}
+.user{
+  color: #fff;
+}
+
+.navbar-default{
+  border: none!important;
+  background: 0 !important;
+  /*background: #444 !important;*/
+  border-bottom: 0;
+}
+.navbar a{
+  color: #fff !important;
+  font-family: "helvetica neue",arial,sans-serif!important;
+}
+.logo{
+  font-size: 38px;
+  line-height: 64px;
+}
+.paihang{
+  top:-10px;
+  left: -10px;
+  color: #ff6c00;
+  position: absolute;
+  display: inline-block;
+  width: 30px;
+  background: #fff!important;
+  height: 30px;
+  text-align: center;
+  line-height: 30px;
+  border-radius: 15px;
+}
+.login{
+  background: 0;
+  border: 1px solid rgba(255,255,255,.8);
+  padding: 0!important;
+  width: 50px !important;
+  height: 32px!important;
+  line-height: 32px!important;
+  display: inline-block;
+  text-align: center;
+  margin-left: 5px;
+}
+.signup{
+  background: rgba(201,0,0,.9);
+  /*border: 1px solid rgba(255,255,255,.8);*/
+  padding: 0!important;
+  width: 50px !important;
+  height: 32px!important;
+  line-height: 32px!important;
+  display: inline-block;
+  text-align: center;
+}
+.imgbox{
+  height: 554px;
+  width: 100%;
+  background-image: url("../images/banner.jpeg");
+  opacity: 1;
+  background-position:center 0px;
+}
+
+.serchTitle{
+  color: #fff;
+  font-size: 60px;
+  margin:0 auto;
+  text-align: center;
+  padding-top: 120px;
+  height: 80px;
+  width: 80%;
+}
+.serchInput{
+  text-align: center;
+  margin-top: 140px;
+  position: relative;
+}
+#query{
+  margin: 0 auto;
+  padding: 0 10px;
+  width: 536px;
+  height: 34px;
+  border: 1px solid rgba(255,255,255,.8);
+  border-radius: 2px;
+  color: #fff;
+  background: rgba(0,0,0,.15);
+  outline: 0;
+}
+#go{
+  background: url("http://huaban.com/img/new_index/icon_search.svg") 9px 7px no-repeat;
+  position: absolute;
+  display: block;
+  top: 0;
+  right: 450px;
+  width: 40px;
+  height: 36px;
+  cursor: pointer;
+}
+.hottitle{
+  color: #ddd;
+}
+.serchWord{
+  color: #fff;
+  width: 542px;
+  margin: 0 auto;
+  padding-top: 28px;
+  padding-left: 10px;
+  font-size: 14px;
+}
+.serchWord span{
+  padding-right: 10px;
+}
+.leftUl{
+  position: fixed;
+  top: 619px;
+
+}
+.leftUl li{
+  /*background: #fff!important;*/
+  margin-bottom: 5px;
+  border-radius: 5px;
+  border: 1px solid rgba(255,255,255,.8);
+  width: 160px;
+  text-align: center;
+  line-height: 30px;
+  height: 30px;
+  list-style: none;
+  font-size: 16px;
+}
+.leftUl li a{
+  text-decoration: none;
+  color: #fff;
+
+}
+#aniwrap{
+  position: fixed;
+  top:0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  color: #fff;
+  width: 100%;
+  height: 100%;
+}
+
+.ani{
+  position: absolute;
+  bottom: 0;
+  word-break: break-all;
+  font-size: 20px;
+  width: 10px;
+  color: #12ca19;
+  left: 10px;
+  text-shadow: 2px 2px 2px #07520a;
+  opacity: 0.6;
+  animation: toTop 4s infinite;
+}
+@keyframes toTop {
+  0%{
+    bottom: -100%;
+  }
+  100%{
+    bottom: 150%;
+  }
 }
